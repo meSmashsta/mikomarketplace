@@ -1,3 +1,6 @@
 [submodule "mikomarketplace-frontend"]
 	path = mikomarketplace-frontend
 	url = https://github.com/meSmashsta/mikomarketplace-frontend
+[submodule "mikomarketplace-backend"]
+	path = mikomarketplace-backend
+	url = https://github.com/meSmashsta/mikomarketplace-backend
