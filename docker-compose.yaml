@@ -51,7 +51,7 @@ services:
       MONGO_INITDB_DATABASE: miko_marketplace
     volumes:
       - ./.mongo-data:/data/db
-      - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+      - ./mongodb/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
     restart: on-failure
     networks:
       - miko-marketplace-network
