@@ -2,6 +2,18 @@ version: '3.9'
 
 services:
 
+  frontend-miko-marketplace:
+  container_name: frontendcontainer
+  build: ./frontend-miko-marketplace
+  volumes:
+    - './frontend-miko-marketplace:/usr/src/app'
+  ports:
+    - '4200:4200'
+  networks:
+    - miko-marketplace-network
+  command: >
+    bash -c "ng serve --host 0.0.0.0 --port 4200"
+
   mongo:
     user: $UID
     image: mongo
