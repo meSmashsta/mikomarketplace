@@ -6,10 +6,11 @@ services:
     user: $UID
     command: npm run dev
     build:
-      context: .
-      dockerfile: ./mikomarketplace-backend
+      context: ./mikomarketplace-backend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    container_name: marketplace-api
     environment:
       MONGO_HOST: localhost
       MONGO_USERNAME: admin
@@ -18,25 +19,30 @@ services:
       MONGO_DATABASE: biobank_auth
     volumes: 
       - ./mikomarketplace-backend:/mikomarketplace-backend
+    networks:
+      - miko-marketplace-network
 
   frontend-miko-marketplace:
-  container_name: frontendcontainer
-  build: ./frontend-miko-marketplace
-  volumes:
-    - './frontend-miko-marketplace:/usr/src/app'
-  ports:
-    - '4200:4200'
-  networks:
-    - miko-marketplace-network
-  command: >
-    bash -c "ng serve --host 0.0.0.0 --port 4200"
+    build:
+      context: ./mikomarketplace-frontend
+      dockerfile: Dockerfile
+    ports:
+      - '4200:4200'
+    container_name: marketplace-ui
+    volumes:
+      - './mikomarketplace-frontend:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    command: >
+      bash -c "ng serve --host 0.0.0.0 --port 4200"
+    networks:
+      - miko-marketplace-network
 
   mongo:
     user: $UID
     image: mongo
-    container_name: mongodb 
     ports:
       - "27017:27017" 
+    container_name: mongodb
     environment: 
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: secret
