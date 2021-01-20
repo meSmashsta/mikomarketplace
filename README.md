@@ -12,6 +12,6 @@
 ```
 ~$ git clone https://github.com/meSmashsta/mikomarketplace.git
 ~/mikomarketplace$ cd mikomarketplace
-~/mikomarketplace$ git submodule update --recursive
+~/mikomarketplace$ git submodule update --init --recursive
 ~/mikomarketplace$ docker-compose up
 ```
