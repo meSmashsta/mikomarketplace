@@ -10,7 +10,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    links:
+    depends_on:
       - mongo
     container_name: marketplace-api
     environment:
@@ -25,6 +25,7 @@ services:
       - /mikomarketplace-backend/node_modules
     networks:
       - miko-marketplace-network
+    restart: on-failure:5 
 
   frontend-miko-marketplace:
     build:
@@ -40,6 +41,7 @@ services:
       bash -c "ng serve --host 0.0.0.0 --port 4200"
     networks:
       - miko-marketplace-network
+    restart: on-failure:5 
 
   mongo:
     user: $UID
@@ -52,6 +54,7 @@ services:
     restart: on-failure
     networks:
       - miko-marketplace-network
+    restart: on-failure:5
 
 volumes:
   .mongo-data:
