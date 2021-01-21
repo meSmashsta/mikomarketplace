@@ -12,6 +12,7 @@ services:
       - "3000:3000"
     container_name: marketplace-api
     environment:
+      NODE_ENV: development
       MONGO_HOST: localhost
       MONGO_USERNAME: admin
       MONGO_PASSWORD: secret
