@@ -17,7 +17,7 @@ services:
       MONGO_USERNAME: admin
       MONGO_PASSWORD: secret
       MONGO_PORT: 27017
-      MONGO_DATABASE: biobank_auth
+      MONGO_DATABASE: miko_marketplace
     volumes: 
       - ./mikomarketplace-backend:/mikomarketplace-backend
       - /mikomarketplace-backend/node_modules
