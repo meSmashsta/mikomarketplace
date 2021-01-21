@@ -10,6 +10,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    links:
+      - mongo
     container_name: marketplace-api
     environment:
       NODE_ENV: development
@@ -17,7 +19,7 @@ services:
       MONGO_USERNAME: admin
       MONGO_PASSWORD: secret
       MONGO_PORT: 27017
-      MONGO_DATABASE: miko_marketplace
+      MONGO_DATABASE: mikomarketplace
     volumes: 
       - ./mikomarketplace-backend:/mikomarketplace-backend
       - /mikomarketplace-backend/node_modules
@@ -44,19 +46,19 @@ services:
     image: mongo
     ports:
       - "27017:27017" 
-    container_name: mongodb
+    container_name: mongo
     environment: 
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: secret
-      MONGO_USERNAME: admin
-      MONGO_PASSWORD: secret
-      MONGO_INITDB_DATABASE: miko_marketplace
+      MONGO_INITDB_DATABASE: mikomarketplace
     volumes:
       - ./.mongo-data:/data/db
-      - ./mongodb/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
     restart: on-failure
     networks:
       - miko-marketplace-network
+
+volumes:
+  .mongo-data:
 
 networks:
   miko-marketplace-network:
