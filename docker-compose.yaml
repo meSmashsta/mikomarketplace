@@ -4,7 +4,7 @@ services:
 
   backend-miko-marketplace:
     user: $UID
-    command: npm run dev
+    command: bash -c "/mikomarketplace-backend/wait-for-it.sh --timeout=0 mongo:27017 && npm run dev"
     build:
       context: ./mikomarketplace-backend
       dockerfile: Dockerfile
